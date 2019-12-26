@@ -1,39 +1,25 @@
----
-title: Securing Swift
-description: Securing Swift
-menu:
-  product_swift_0.8.1:
-    identifier: guides-security
-    name: Securing Swift
-    parent: guides
-    weight: 15
-product_name: swift
-menu_name: product_swift_0.8.1
-section_menu_id: guides
----
+# 保护Swift
 
-# Securing Swift
+保护Swift连接包括三个方面：
 
-There are 3 aspects to securing swift connections:
-
-- User <-> Swift Server
-- Swift Server <-> Tiller Server
-- Swift Server <-> Chart Repo
+- 用户 <-> Swift服务端
+- Swift服务端 <-> Tiller服务端
+- Swift服务端 <-> Chart仓库
 
 
-## Serve Swift api over SSL
+## 通过SSL提供Swift API
 
-To serve Swift api over SSL connections, you provide a server certificate pair via `--tls-cert-file` and `--tls-private-key-file` flags. If you use a self-signed certificate pair, pass the CA certificate via `--tls-ca-file` flag.
+通过SSL连接提供Swift API，需要通过 `--tls-cert-file` 和 `--tls-private-key-file` 标记来提供服务端证书对。如果使用自签名证书对，需要通过 `--tls-ca-file` 标记来传递CA证书。
 
 ```
-  --tls-ca-file string                      File containing CA certificate
-  --tls-cert-file string                    File container server TLS certificate
-  --tls-private-key-file string             File containing server TLS private key
+  --tls-ca-file string                      包含CA证书的文件
+  --tls-cert-file string                    包含服务端TLS证书的文件
+  --tls-private-key-file string             包含服务端TLS私钥的文件
 ```
 
-You can generate certificate pair using tools like [onessl](https://github.com/kubepack/onessl), openssl, cfssl. Below are instructions for generating certificate pairs using onessl:
+可以使用[onessl](https://github.com/kubepack/onessl)、openssl、cfssl等工具来生成证书对。下面是使用onessl来生成证书对的说明：
 
-- Download onessl binary from project's Github release page:
+- 从项目的Github发布页面下载onessl二进制文件。
 
 ```console
 # Linux amd64:
@@ -52,7 +38,7 @@ curl -fsSL -o onessl https://github.com/kubepack/onessl/releases/download/0.3.0/
   && sudo mv onessl /usr/local/bin/
 ```
 
-- Now create a ca certificate pair using onessl.
+- 使用onessl创建CA证书对。
 
 ```console
 $ mkdir swift
@@ -64,7 +50,7 @@ ca.crt
 ca.key
 ```
 
-- Now create a server certificate pair using the ca-certificate from previous step. Pass the domain names used to connect to Swift server using `--domains` flag
+- 使用上一步骤中创建的CA证书来创建服务端证书对。使用 `--domains` 标记来传递连接Swift服务端的域名。
 
 ```console
 $ onessl create server-cert --domains=swift.kube-system.svc
@@ -77,7 +63,7 @@ server.crt
 server.key
 ```
 
-- Now create a secret to upload certificates to a Kubernetes cluster and mount the secret is Swfift deployment.
+- 创建把证书上传到Kubernetes集群的密钥，挂载密钥的是Swift Deployment。
 
 ```console
 $ kubectl create secret generic swift-ssl -n kube-system \
@@ -89,23 +75,23 @@ secret "swift-ssl" created
 ```
 
 
-## Using authentication with Chart Repository
+## 对Chart仓库使用认证
 
-Swift can download charts from Chart repository using basic auth, bearer auth and/or client cert auth. `InstallRelease` and `UpdateRelease` api support the following input parameters with their respectie api calls:
+使用用户名密码认证（Basic Auth）、不记名令牌认证（Bearer Auth）或客户端证书认证（Client Cert Auth），Swift可以从Chart仓库下载Chart。 `InstallRelease` 和 `UpdateRelease` API在各自的API调用中支持以下输入参数：
 
-| Parameter              |            | Description                                                                |
-|------------------------|------------| ---------------------------------------------------------------------------|
-| `chart_url`            | `Required` | URL to download chart archive.                                              |
-| `ca_bundle`            | `Optional` | PEM encoded CA bundle used to sign server certificate of chart repository. |
-| `username`             | `Optional` | Username for basic authentication to the chart repository.                 |
-| `password`             | `Optional` | Password for basic authentication to the chart repository.                 |
-| `token`                | `Optional` | Bearer token for authentication to the chart repository.                   |
-| `client_certificate`   | `Optional` | PEM-encoded data passed as a client cert to chart repository.              |
-| `client_key`           | `Optional` | PEM-encoded data passed as a client key to chart repository.               |
-| `insecure_skip_verify` | `Optional` | Skip certificate verification for chart repository.                        |
+| 参数                   | 是否必要 | 描述                                           |
+|------------------------|----------| -----------------------------------------------|
+| `chart_url`            | `必要的` | 要下载的Chart归档的URL。                       |
+| `username`             | `可选的` | 用户名，用于对Chart仓库进行基础认证。          |
+| `password`             | `可选的` | 密码，用于对Chart仓库进行基础认证。            |
+| `token`                | `可选的` | 不记名令牌，用于对Chart仓库进行认证。          |
+| `ca_bundle`            | `可选的` | PEM编码的CA包，用于签名Chart仓库的服务端证书。 |
+| `client_certificate`   | `可选的` | PEM编码的数据，作为客户端证书传递给Chart仓库。 |
+| `client_key`           | `可选的` | PEM编码的数据，作为客户端Key传递给Chart仓库。  |
+| `insecure_skip_verify` | `可选的` | 跳过Chart仓库的证书认证。                      |
 
 
-## Securely connecting to Tiller Server
+## 安全地连接到Tiller服务端
 
 You can run Swift server in the same pod as the Tiller server and connect over localhost. This will ensure that traffic between Tiller server and Swift proxy is not visible to outside parties.
 

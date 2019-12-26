@@ -1,27 +1,16 @@
----
-title: Swift Run
-menu:
-  product_swift_0.8.1:
-    identifier: swift-run
-    name: Swift Run
-    parent: reference
-product_name: swift
-menu_name: product_swift_0.8.1
-section_menu_id: reference
----
 ## swift run
 
-Run swift apis
+运行Swift API。
 
-### Synopsis
+### 概述
 
-Run swift apis
+运行Swift API。
 
 ```
 swift run [flags]
 ```
 
-### Options
+### 选项
 
 ```
       --api-domain string                       Domain used for apiserver (prod: api.appscode.com
@@ -45,7 +34,7 @@ swift run [flags]
       --tls-private-key-file string             File containing server TLS private key
 ```
 
-### Options inherited from parent commands
+### 从父命令继承而来的选项
 
 ```
       --alsologtostderr                  log to standard error as well as files

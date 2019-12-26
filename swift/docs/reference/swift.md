@@ -1,26 +1,10 @@
----
-title: Swift
-menu:
-  product_swift_0.8.1:
-    identifier: swift
-    name: Swift
-    parent: reference
-    weight: 0
-
-product_name: swift
-menu_name: product_swift_0.8.1
-section_menu_id: reference
-aliases:
-  - products/swift/0.8.1/reference/
-
----
 ## swift
 
-Swift by Appscode - Ajax friendly Helm Tiller Proxy
+Appscode Swift - Ajax友好的Helm Tiller代理。
 
-### Synopsis
+### 概述
 
-Swift by Appscode - Ajax friendly Helm Tiller Proxy
+Appscode Swift - Ajax友好的Helm Tiller代理。
 
 ### Options
 

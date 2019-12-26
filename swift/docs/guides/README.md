@@ -1,24 +1,7 @@
----
-title: Table of Contents | Guides
-description: Table of Contents | Guides
-menu:
-  product_swift_0.8.1:
-    identifier: guides-readme
-    name: Readme
-    parent: guides
-    weight: -1
-product_name: swift
-menu_name: product_swift_0.8.1
-section_menu_id: guides
-url: /products/swift/0.8.1/guides/
-aliases:
-  - /products/swift/0.8.1/guides/README/
----
+# Swift使用指南
 
-# Guides
+本节包含了Swift的使用指南。
 
-This section contains guides on how to use Swift.
+- [API参考](/docs/guides/api.md)：本文描述了Swift代理API的各个方面。
 
-- [API Reference](/docs/guides/api.md): This article documents various aspects of Swift proxy api.
-
-- [Securing Swift](/docs/guides/security.md): This article documents various aspects of securing Swift.
+- [保护Swift](/docs/guides/security.md)：本文描述了保护Swift的各个方面。

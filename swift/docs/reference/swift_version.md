@@ -1,34 +1,23 @@
----
-title: Swift Version
-menu:
-  product_swift_0.8.1:
-    identifier: swift-version
-    name: Swift Version
-    parent: reference
-product_name: swift
-menu_name: product_swift_0.8.1
-section_menu_id: reference
----
 ## swift version
 
-Prints binary version number.
+打印二进制版本号。
 
-### Synopsis
+### 概要
 
-Prints binary version number.
+打印二进制版本号。
 
 ```
 swift version [flags]
 ```
 
-### Options
+### 选项
 
 ```
-  -h, --help    help for version
-      --short   Print just the version number.
+  -h, --help    查看swift version的帮助文档
+      --short   只打印版本号
 ```
 
-### Options inherited from parent commands
+### 从父命令继承而来的选项
 
 ```
       --alsologtostderr                  log to standard error as well as files
@@ -41,7 +30,7 @@ swift version [flags]
       --vmodule moduleSpec               comma-separated list of pattern=N settings for file-filtered logging
 ```
 
-### SEE ALSO
+### 参阅
 
 * [swift](/docs/reference/swift.md)	 - Swift by Appscode - Ajax friendly Helm Tiller Proxy
 

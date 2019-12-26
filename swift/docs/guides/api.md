@@ -1,25 +1,11 @@
----
-title: API Reference
-description: API Reference
-menu:
-  product_swift_0.8.1:
-    identifier: guides-apiserver
-    name: API Reference
-    parent: guides
-    weight: 10
-product_name: swift
-menu_name: product_swift_0.8.1
-section_menu_id: guides
----
+# API参考
 
-# API Reference
-
-## Tiller Version
+## Tiller版本
 ```
 GET http://127.0.0.1:9855/tiller/v2/version/json
 ```
 
-## Summarize releases
+## Release汇总
 ```
 # List releases with status `DEPLOYED` from all namespaces
 GET http://127.0.0.1:9855/tiller/v2/releases/json
@@ -44,12 +30,12 @@ Available query parameters:
   status_codes=UNKNOWN, DEPLOYED, DELETED, SUPERSEDED, FAILED, DELETING
 ```
 
-## Release status
+## Release状态
 ```
 GET http://127.0.0.1:9855/tiller/v2/releases/my-release/status/json
 ```
 
-## Release content
+## Release内容
 ```
 
 GET http://127.0.0.1:9855/tiller/v2/releases/my-release/content/json
@@ -57,20 +43,20 @@ GET http://127.0.0.1:9855/tiller/v2/releases/my-release/content/json?format_valu
 
 ```
 
-## Release history
+## Release历史
 ```
 GET http://127.0.0.1:9855/tiller/v2/releases/my-release/json?max=10
 ```
 
-## Rollback release
+## Release回滚
 ```
 GET http://127.0.0.1:9855/tiller/v2/releases/my-release/rollback/json
 ```
 
-## Install release from url
+## 从URL安装Release
 
 ```
-# Install chart in default namespace
+# 在default命名空间中安装Chart
 POST http://127.0.0.1:9855/tiller/v2/releases/my-release/json
 
 {
@@ -80,7 +66,7 @@ POST http://127.0.0.1:9855/tiller/v2/releases/my-release/json
 	}
 }
 
-# Install chart in custom "kube-system" namespace
+# 在自定义的kube-system命名空间中安装Chart
 POST http://127.0.0.1:9855/tiller/v2/releases/my-release/json
 
 {
@@ -91,7 +77,7 @@ POST http://127.0.0.1:9855/tiller/v2/releases/my-release/json
 	}
 }
 
-# Install chart in custom "kube-system" namespace with custom values.yaml
+# 使用自定义的values.yaml，在自定义的kube-system命名空间中安装Chart
 
 ## values.yaml
 proxy:
@@ -99,7 +85,7 @@ proxy:
 rbac:
    enabled: false
 
-## convert values.yaml to json format and pass as string in "values.raw"
+## 把values.yaml转换为JSON格式，并以字符串形式传递给values.raw
 {
   "proxy": {
     "secretToken": "mytoken"
@@ -120,7 +106,7 @@ POST http://127.0.0.1:9855/tiller/v2/releases/my-release/json
 }
 ```
 
-## Install release from stable kubeapps (most recent version)
+## 从稳定的Kube应用安装最新版本的Release
 
 ```
 POST http://127.0.0.1:9855/tiller/v2/releases/my-release/json
@@ -130,7 +116,7 @@ POST http://127.0.0.1:9855/tiller/v2/releases/my-release/json
 }
 ```
 
-## Install release from stable kubeapps (specific version)
+## 从稳定的Kube应用安装特定版本的Release
 
 ```
 POST http://127.0.0.1:9855/tiller/v2/releases/my-release/json
@@ -140,7 +126,7 @@ POST http://127.0.0.1:9855/tiller/v2/releases/my-release/json
 }
 ```
 
-## Update release
+## Release更新
 
 ```
 PUT http://127.0.0.1:9855/tiller/v2/releases/my-release/json
@@ -153,13 +139,13 @@ PUT http://127.0.0.1:9855/tiller/v2/releases/my-release/json
 }
 ```
 
-## Uninstall release
+## Release卸载
 
 ```
 DELETE http://127.0.0.1:9855/tiller/v2/releases/my-release/json
 ```
 
-## Uninstall & purge release
+## Release卸载及清除
 
 ```
 DELETE http://127.0.0.1:9855/tiller/v2/releases/my-release/json?purge=true
